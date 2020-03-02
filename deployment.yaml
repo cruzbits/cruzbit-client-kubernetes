@@ -1,0 +1,31 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: cruzbit
+  labels:
+    name: cruzbit
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: cruzbit
+  name: cruzbit-deployment
+  labels:
+    app: cruzbit
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cruzbit
+  template:
+    metadata:
+      labels:
+        app: cruzbit
+    spec:
+      containers:
+      - name: cruzbit
+        image: cruzbit/cruzbit-client-docker:latest
+        ports:
+        - containerPort: 8831
+        
